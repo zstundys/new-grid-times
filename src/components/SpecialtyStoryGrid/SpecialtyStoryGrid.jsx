@@ -46,8 +46,10 @@ const SpecialtyStoryGrid = () => {
 };
 
 const Wrapper = styled.div`
+  --gap: 48px;
+
   display: grid;
-  gap: 48px;
+  gap: var(--gap);
 
   @media ${QUERIES.laptopAndUp} {
     grid-template-columns: 1fr 1fr;
@@ -70,6 +72,18 @@ const MarketCards = styled.div`
 
 const SportsSection = styled.section`
   display: grid;
+  position: relative;
+
+  @media ${QUERIES.laptopAndUp} {
+    &::before {
+      position: absolute;
+      top: 0;
+      left: calc(var(--gap) * -0.5);
+      bottom: 0;
+      border-left: 1px solid var(--color-gray-300);
+      content: "";
+    }
+  }
 `;
 
 const SportsStories = styled.div`

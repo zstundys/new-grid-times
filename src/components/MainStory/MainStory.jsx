@@ -47,7 +47,7 @@ const Abstract = styled.p`
   overflow: hidden;
 
   @media ${QUERIES.tabletAndUp} {
-    --line-clamp: 16;
+    --line-clamp: 12;
   }
 `;
 

@@ -1,17 +1,14 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
+import { QUERIES } from "../../constants";
 
-import {
-  MAIN_STORY,
-  OPINION_STORIES,
-  SECONDARY_STORIES,
-} from '../../data';
+import { MAIN_STORY, OPINION_STORIES, SECONDARY_STORIES } from "../../data";
 
-import SectionTitle from '../SectionTitle';
-import MainStory from '../MainStory';
-import SecondaryStory from '../SecondaryStory';
-import OpinionStory from '../OpinionStory';
-import Advertisement from '../Advertisement';
+import Advertisement from "../Advertisement";
+import MainStory from "../MainStory";
+import OpinionStory from "../OpinionStory";
+import SecondaryStory from "../SecondaryStory";
+import SectionTitle from "../SectionTitle";
 
 const MainStoryGrid = () => {
   return (
@@ -21,20 +18,26 @@ const MainStoryGrid = () => {
       </MainStorySection>
 
       <SecondaryStorySection>
-        <StoryList>
+        <SecondaryStoryList>
           {SECONDARY_STORIES.map((story, index) => (
-            <SecondaryStory key={story.id} {...story} />
+            <>
+              {index > 0 && <Divider />}
+              <SecondaryStory key={story.id} {...story} />
+            </>
           ))}
-        </StoryList>
+        </SecondaryStoryList>
       </SecondaryStorySection>
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
+        <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
-            <OpinionStory key={story.id} {...story} />
+            <>
+              {index > 0 && <OpinionDivider />}
+              <OpinionStory key={story.id} {...story} />
+            </>
           ))}
-        </StoryList>
+        </OpinionStoryList>
       </OpinionSection>
 
       <AdvertisementSection>
@@ -47,10 +50,10 @@ const MainStoryGrid = () => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-areas:
-    'main-story'
-    'secondary-stories'
-    'opinion-stories'
-    'advertisement';
+    "main-story"
+    "secondary-stories"
+    "opinion-stories"
+    "advertisement";
   gap: 48px;
   margin-bottom: 48px;
 `;
@@ -63,9 +66,36 @@ const SecondaryStorySection = styled.section`
   grid-area: secondary-stories;
 `;
 
-const StoryList = styled.div`
+const SecondaryStoryList = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const OpinionStoryList = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media ${QUERIES.tabletOnly} {
+    flex-direction: row;
+    gap: 0 32px;
+
+    & > * {
+      flex: 1;
+    }
+  }
+`;
+
+const Divider = styled.hr`
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--color-gray-300);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const OpinionDivider = styled(Divider)`
+  @media ${QUERIES.tabletOnly} {
+    display: none;
+  }
 `;
 
 const OpinionSection = styled.section`
